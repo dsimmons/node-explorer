@@ -1,23 +1,24 @@
-{ 
-	"name": "node-explorer",
+{
+    "name": "node-explorer",
 	"description": "A NodeJS file directory explorer & file server",
-	"version": "0.1.0",
-	"main": "./app/app.js",
-	"author": "Dan Simmons <xiode04@gmail.com> (danielrsimmons.com)",
+	"version": "0.0.1",
+	"main": "app.js",
+	"author": "Dan Simmons <dsimmons@gatech.edu> (danielrsimmons.com)",
 	"repositories": {
 		"type": "git",
 		"url": "git://github.com/dsimmons/node-explorer.git"
 	},
 	"directories": {
-		"lib": "./lib"
+		"views": "./views",
+		"public": "./public"
 	},
 	"engines": {
-		"node": "0.4.x"
+		"node": ">= 0.4.1"
 	},
-	"dependencies": {
-		"express": "2.4.x",
-		"connect": "1.6.x",
-		"jade": "0.13.x",
-		"mongodb": "0.9.x"
-	}
+  	"dependencies": {
+		"express": "2.4.3",
+		"mongodb": ">= 0.0.1",
+		"sass": ">= 0.0.1",
+		"jade": ">= 0.0.1"
+  }
 }

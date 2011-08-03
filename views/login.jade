@@ -1,20 +1,15 @@
-!!! 5
-html(lang='en')
-	head
-		title node-explorer login
-	body
-		h1 node-explorer login
-	#content
+h1 Login to continue
+#content
 		p
 			| Please login or go
 			a(href='/signup') here
-			| to createa new account.
-		form(method='post', action='/login')
-			p
-				label Username:
-					input(type='text', name='username')
-			p
-				label Password:
-					input(type='password', name='password')
-			p
-				input(type='submit', value='send')
+			|  to create a new account.
+			form(method='post', action='/login')
+		p
+			label Username:
+				input(type='text', name='username')
+		p
+			label Password:
+				input(type='password', name='password')
+		p
+			input(type='submit', value='send')
