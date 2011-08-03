@@ -1,0 +1,11 @@
+{ 
+	"name": "node-explorer",
+	"description": "A NodeJS file directory explorer & file server",
+	"version": "0.1.0",
+	"main": "./app/app.js",
+	"author": "Dan Simmons <xiode04@gmail.com> (danielrsimmons.com)",
+	"repositories": {
+		"type": "git",
+		"url": "git://github.com/dsimmons/node-explorer.git"
+	}
+}
