@@ -4,12 +4,13 @@ h1 Login to continue
 			| Please login or go
 			a(href='/signup') here
 			|  to create a new account.
+		p
 			form(method='post', action='/login')
-		p
-			label Username:
-				input(type='text', name='username')
-		p
-			label Password:
-				input(type='password', name='password')
-		p
-			input(type='submit', value='send')
+				p
+					label Username:
+						input(type='text', name='username')
+				p
+					label Password:
+						input(type='password', name='password')
+				p
+					input(type='submit', value='send')
