@@ -1,7 +1,15 @@
 
 // Module dependencies
-var express = require('express');
-app = module.exports = express.createServer();
+sys = require('sys');
+path = require('path');
+express = require('express');
+mongoose = require('mongoose');
+
+app_root = __dirname;
+global.app = module.exports = express.createServer();
+
+// Set up DB Connection
+
 
 // Configuration
 app.configure(function(){
@@ -25,13 +33,10 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/', function(req, res){
-  res.render('login', {
-	title: 'Login'
-  });
-});
+require('./controllers/index.js');
 require('./controllers/login.js');
 require('./controllers/signup.js');
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Running out of: %s", app_root);
