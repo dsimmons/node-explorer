@@ -1,15 +1,40 @@
-
-// Module dependencies
+/* Global dependencies and exports */
 sys = require('sys');
 path = require('path');
 express = require('express');
-mongoose = require('mongoose');
 
+app = module.exports = express.createServer();
 app_root = __dirname;
-global.app = module.exports = express.createServer();
 
-// Set up DB Connection
+/* Connect to MongoDB */
+mongoose = require('mongoose');
+db = mongoose.connect('mongodb://localhost/node-explorer');
 
+if (db) {
+	console.log("Connection to MongoDB successful!");
+} else {
+	console.log("Unable to connect to MongoDB!");
+	throw err;
+}
+
+require('./models/user.js');
+User = mongoose.model('User');
+
+/* See if we need to create the admin account */
+User.findOne({}, function(err, user) {
+	if (!user) {
+		console.log("It appears this is the first time you've run node-explorer!");
+		console.log("Initializing admin account....");
+		var user = new User();
+		user.username = 'admin';
+		user.password = 'password';
+		user.admin = true;
+		user.save(function(err) {
+			if (err) console.log("Unable to write to database!");
+			else console.log("Admin account created succesfully! (admin :: password)");
+		});
+	}
+});
 
 // Configuration
 app.configure(function(){
