@@ -1,0 +1,29 @@
+h1 New User - Register 
+h4 
+	| Note: Fill out the following accurately.
+	br
+	| An administrator will only approve this account based on
+	| accurate information being provided.
+#content
+		p
+			form(method='post', action='/signup')
+				p
+					label First Name:
+						input(type='text', name='username')
+				p
+					label Last Name:
+						input(type='text', name='username')
+				p
+					label Username:
+						input(type='text', name='username')
+				p
+					label Password:
+						input(type='password', name='password')
+				p
+					label Repeat Password:
+						input(type='password', name='password2')
+				p
+					label Email:
+						input(type='text', name='email')
+				p
+					input(type='submit', value='signup')
