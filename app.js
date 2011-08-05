@@ -2,6 +2,9 @@
 sys = require('sys');
 path = require('path');
 express = require('express');
+require('joose');
+require('joosex-namespace-depended');
+require('hash');
 
 app = module.exports = express.createServer();
 app_root = __dirname;
@@ -27,8 +30,9 @@ User.findOne({}, function(err, user) {
 		console.log("Initializing admin account....");
 		var user = new User();
 		user.username = 'admin';
-		user.password = 'password';
-		user.admin = true;
+		user.password = Hash.sha256('password');
+		user.isEnabled = true;
+		user.isAdmin = true;
 		user.save(function(err) {
 			if (err) console.log("Unable to write to database!");
 			else console.log("Admin account created succesfully! (admin :: password)");
@@ -61,6 +65,9 @@ app.configure('production', function(){
 require('./controllers/index.js');
 require('./controllers/login.js');
 require('./controllers/signup.js');
+
+// Libraries
+auth = require('./lib/auth.js');
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

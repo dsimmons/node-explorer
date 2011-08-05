@@ -1,12 +1,13 @@
 var schema = new mongoose.Schema({
-	firstName: { type: String },
-	lastName: { type: String },
-	username: { type: String },
-	password: { type: String },
-	email: { type: String },
-	registered: { type: Date, default: Date.now },
-	lastAccess: { type: Date, default: Date.now },
-	admin: { type: Boolean, default: false }
+	firstName: String,
+	lastName: String,
+	username: String,
+	password: String,
+	email: String,
+	registerDate: { type: Date, default: Date.now },
+	accessDate: { type: Date, default: Date.now },
+	isEnabled: { type: Boolean, default: false },
+	isAdmin: { type: Boolean, default: false }
 });
 
 mongoose.model('User', schema); 
