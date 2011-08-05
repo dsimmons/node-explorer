@@ -1,5 +1,10 @@
 app.get('/login', function(req, res) {
-	res.render('login');
+
+	if (req.session.user) {
+		res.redirect('/');
+	} else {
+		res.render('login', {'user': null});
+	}
 });
 
 app.post('/login', function(req, res) {
@@ -13,7 +18,10 @@ app.post('/login', function(req, res) {
 				req.session.cookie.maxAge = 1000 * 60 * 60; //check -- 1 min?
 				req.session.user = user;
 
-				res.redirect('/');
+				if (user.isAdmin === true) 
+					res.redirect('/admin')
+				else
+					res.redirect('/');
 			});
 		}
 	});

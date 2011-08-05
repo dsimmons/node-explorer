@@ -1,11 +1,7 @@
 app.get('/', checkSession, function(req, res) {
-	res.render('index', {
-		locals: { 
-					name: req.session.user.name, 
-					hashPass: JSON.stringify(req.session.user.hashPass)
-				}
-	});
+	res.render('index', { 'user': req.session.user });
 });
+
 
 function checkSession(req, res, next) {
 	if (req.session.user) {
@@ -15,3 +11,10 @@ function checkSession(req, res, next) {
 		res.redirect('/login');
 	}
 };
+
+
+app.get('/logout', function(req, res) {
+	req.session.destroy(function() {
+		res.redirect('/');
+	});
+});

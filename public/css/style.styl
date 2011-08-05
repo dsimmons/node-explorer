@@ -1,0 +1,52 @@
+round(arguments)
+	-webkit-border-radius arguments
+	-moz-border-radius arguments
+	border-radius arguments
+
+shadow()
+	-webkit-box-shadow 0 1px 2px rgba(0,0,0,.2)
+	-moz-box-shadow 0 1px 2px rgba(0,0,0,.2)
+	box-shadow 0 1px 2px rgba(0,0,0,.2)
+
+button()
+	display inline-block
+	padding .5em 2em .55em
+	outline none
+	cursor pointer
+	text-align center
+	text-decoration none
+	border solid 1px #ccc
+	text-shadow 0 1px 1px rgba(0,0,0,.3)
+	&:hover
+		text-decoration none
+	&:active
+		position relative
+		top 1px
+
+gradient(top, bottom)
+	background-color bottom
+	background -webkit-gradient(linear, left top, left bottom, from(top), to(bottom))
+	background -moz-linear-gradient(top, top, bottom)
+	@css { filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom}) }
+
+color_obj(arguments)
+	border solid 1px darken(arguments, 3%)
+	color mix(#fff, arguments, 90%)
+	gradient lighten(arguments, 13%), arguments
+	&:hover
+		gradient(lighten(arguments, 10%), darken(arguments, 5%))
+	&:active
+		gradient(arguments, lighten(arguments, 10%))
+
+.button
+	round(0.5em)
+	shadow()
+	button()
+	color_obj(#00B7FF)
+
+body
+	padding 50px
+	font 14px "Lucida Grande", Helvetica, Arial, sans-serif
+
+a
+	color #00B7FF

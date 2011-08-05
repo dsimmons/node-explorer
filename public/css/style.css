@@ -1,6 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;}
-
-a {
-  color: #00B7FF;}
+.button{-webkit-border-radius:.5em;-moz-border-radius:.5em;border-radius:.5em;-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.2);-moz-box-shadow:0 1px 2px rgba(0,0,0,0.2);box-shadow:0 1px 2px rgba(0,0,0,0.2);display:inline-block;padding:.5em 2em .55em;outline:none;cursor:pointer;text-align:center;text-decoration:none;border:solid 1px #ccc;text-shadow:0 1px 1px rgba(0,0,0,0.3);border:solid 1px #00b2f7;color:mix(#fff,#00b7ff,90%);background-color:#00b7ff;background:-webkit-gradient(linear,left #21c0ff,left #00b7ff,from(#21c0ff),to(#00b7ff));background:-moz-linear-gradient(#21c0ff,#21c0ff,#00b7ff);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
+.button:hover{text-decoration:none}
+.button:active{position:relative;top:1px}
+.button:hover{background-color:#00aef2;background:-webkit-gradient(linear,left #1abeff,left #00aef2,from(#1abeff),to(#00aef2));background:-moz-linear-gradient(#1abeff,#1abeff,#00aef2);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
+.button:active{background-color:#1abeff;background:-webkit-gradient(linear,left #00b7ff,left #1abeff,from(#00b7ff),to(#1abeff));background:-moz-linear-gradient(#00b7ff,#00b7ff,#1abeff);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
+body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}
+a{color:#00b7ff}

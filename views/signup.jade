@@ -6,24 +6,4 @@ h4
 	| accurate information being provided.
 #content
 		p
-			form(method='post', action='/signup')
-				p
-					label First Name:
-						input(type='text', name='firstName')
-				p
-					label Last Name:
-						input(type='text', name='lastName')
-				p
-					label Username:
-						input(type='text', name='username')
-				p
-					label Password:
-						input(type='password', name='password')
-				p
-					label Repeat Password:
-						input(type='password', name='password2')
-				p
-					label Email:
-						input(type='text', name='email')
-				p
-					input(type='submit', value='signup')
+			include includes/userForm

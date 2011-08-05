@@ -2,6 +2,7 @@
 sys = require('sys');
 path = require('path');
 express = require('express');
+stylus = require('stylus');
 require('joose');
 require('joosex-namespace-depended');
 require('hash');
@@ -40,6 +41,10 @@ User.findOne({}, function(err, user) {
 	}
 });
 
+//function compile(str, path) {
+	//return stylus(str).set('filename', path).set('compress', true);
+//};
+
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -48,7 +53,13 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'explore-node' }));
-  app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
+  //app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
+  app.use(stylus.middleware({
+	  src: __dirname + '/public',
+	  compile: function compile(str, path) {
+			return stylus(str).set('filename', path).set('compress', true);
+		}
+  }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -65,7 +76,8 @@ app.configure('production', function(){
 require('./controllers/index.js');
 require('./controllers/login.js');
 require('./controllers/signup.js');
-require('./controllers/logout.js');
+require('./controllers/user.js');
+require('./controllers/admin.js');
 
 // Libraries
 auth = require('./lib/auth.js');
