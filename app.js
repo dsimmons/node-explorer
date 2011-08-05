@@ -65,6 +65,7 @@ app.configure('production', function(){
 require('./controllers/index.js');
 require('./controllers/login.js');
 require('./controllers/signup.js');
+require('./controllers/logout.js');
 
 // Libraries
 auth = require('./lib/auth.js');
