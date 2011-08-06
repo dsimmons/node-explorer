@@ -1,8 +1,9 @@
 ### node-explorer
 
-**Node**: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date with undisclosed additional enhancements. That portion will *not* be public.
+**Note**: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date with undisclosed additional enhancements. That portion will *not* be public.
 
 node-explorer seeks to be a lightweight file server built using Node.js and the following:
+
 * MongoDB
 * Express
 * MVC with Backbone.js
@@ -29,6 +30,7 @@ node-explorer seeks to be a lightweight file server built using Node.js and the 
 	npm install -d
 	node app
 
+You should now be able to access the server at http://<serverip>:3000/
 
 ### License
 
