@@ -1,6 +1,6 @@
-## node-explorer
+### node-explorer
 
-Note: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date. That portion will *not* be public.
+**Node**: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date with undisclosed additional enhancements. That portion will *not* be public.
 
 node-explorer seeks to be a lightweight file server built using Node.js and the following:
 * MongoDB
@@ -33,7 +33,7 @@ node-explorer seeks to be a lightweight file server built using Node.js and the 
 ### License
 
 The MIT License (MIT)
-Copyright (c) <2011> <Dan Simmons>
+Copyright (c) 2011 Dan Simmons
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
