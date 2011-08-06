@@ -1,28 +1,28 @@
-### node-explorer
+## node-explorer
 
-**Note**: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date with undisclosed additional enhancements. That portion will *not* be public.
+**node-explorer** is intended to be a lightweight file server built using node.js and the following:
 
-node-explorer seeks to be a lightweight file server built using Node.js and the following:
-
-* MongoDB
-* Express
-* MVC with Backbone.js
-* HTML templating with Jade
-* CSS templating with Stylus
+* **MongoDB**
+* **Express**
+* MVC with **Backbone.js**
+* HTML templating with **Jade**
+* CSS templating with **Stylus**
 
 ### Features (planned)
-* Authentication
+* **Authentication**
 	* Only authenticated users can make it to the home page.
 	* New users can register, but accounts are disabled by default.
 	* Administrators have full control over who is granted access.
-* Security
+* **Security**
 	* All passwords are stored as salted SHA-256 hashes.
 	* Traffic defaults to HTTPS over TLS/SSL.
-* Speed
+* **Speed**
 	* FAST. Node + MongoDB + Express.
 	* Additional caching mechanisms to come eventually.
 	* TODO: Test Node performance of varying buffer size for multiple simultaneous requests.
 	* TODO: Test single process vs child workers for serving up files.
+
+**Note**: The core functionality of this project will continue to be open-sourced and supported. However, I intend to fork the core at some later date with undisclosed additional enhancements. That portion will *not* be public.
 
 ### Install
 	git clone git@github.com:dsimmons/node-explorer.git
@@ -30,7 +30,7 @@ node-explorer seeks to be a lightweight file server built using Node.js and the 
 	npm install -d
 	node app
 
-You should now be able to access the server at http://<serverip>:3000/
+You should now be able to access the server at http://serverip:3000/
 
 ### License
 
