@@ -1,21 +1,25 @@
 form(method='post', action='/user')
 	p
 		label First Name:
-			input(type='text', name='firstName')
+			input(type='text', name='firstName, value= user.firstName)
 	p
 		label Last Name:
-			input(type='text', name='lastName')
+			input(type='text', name='lastName', value= user.lastName)
 	p
 		label Username:
-			input(type='text', name='username')
+			input(type='text', name='username', value= user.username)
+	-if (user)
+		p
+			label Existing Password: 
+				input(type='password', name='passOld")
 	p
-		label Password:
+		label Create Password:
 			input(type='password', name='password')
 	p
 		label Repeat Password:
 			input(type='password', name='password2')
 	p
 		label Email:
-			input(type='text', name='email')
+			input(type='text', name='email', value= user.email)
 	p
 		input(type='submit', value='submit')

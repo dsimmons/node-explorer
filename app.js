@@ -41,10 +41,6 @@ User.findOne({}, function(err, user) {
 	}
 });
 
-//function compile(str, path) {
-	//return stylus(str).set('filename', path).set('compress', true);
-//};
-
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -53,6 +49,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'explore-node' }));
+  // TODO: Might switch back to sass later.
   //app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
   app.use(stylus.middleware({
 	  src: __dirname + '/public',
@@ -72,12 +69,7 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-// Routes
-//require('./controllers/index.js');
-//require('./controllers/login.js');
-//require('./controllers/signup.js');
-//require('./controllers/user.js');
-//require('./controllers/admin.js');
+// Router
 require('./controllers/routes.js');
 
 // Libraries

@@ -32,7 +32,7 @@ app.get('/logout', function(req, res) {
 
 
 app.get('/signup', function(req, res) {
-	res.render('signup', {'user': null});
+	res.render('signup', {'user': {}});
 });
 
 
@@ -123,8 +123,8 @@ function validateForm(req, res, next) {
 		}(),
 	}
 	if (origin === 'user') {
-		validationList['newPass'] = function() {
-			return (form.newPass != undefined) && (regex_password.test(form.newPass));
+		validationList['passOld'] = function() {
+			return regex_password.test(form.newPass);
 		}()
 	}
 	var valid = true;
@@ -136,9 +136,11 @@ function validateForm(req, res, next) {
 	}
 	console.log(validationList);
 	console.log('valid: ' + valid);
-	console.log(origin);
 	if (valid)
 		next();
+	else {
+		// TODO: add later
+	}
 
 }
 
