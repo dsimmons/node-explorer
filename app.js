@@ -73,11 +73,12 @@ app.configure('production', function(){
 });
 
 // Routes
-require('./controllers/index.js');
-require('./controllers/login.js');
-require('./controllers/signup.js');
-require('./controllers/user.js');
-require('./controllers/admin.js');
+//require('./controllers/index.js');
+//require('./controllers/login.js');
+//require('./controllers/signup.js');
+//require('./controllers/user.js');
+//require('./controllers/admin.js');
+require('./controllers/routes.js');
 
 // Libraries
 auth = require('./lib/auth.js');
