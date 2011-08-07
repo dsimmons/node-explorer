@@ -1,5 +1,10 @@
-- if (user)
+- if (user.username)
 	p.nav
+		a(href='/') Home
+		|  |  
+		-if (user.isAdmin)
+			a(href='/admin') Admin Panel
+			|  |  
 		a(href='/user') Edit Profile
 		|  |  
 		a(href='/logout') Log Out

@@ -3,6 +3,7 @@ sys = require('sys');
 path = require('path');
 express = require('express');
 stylus = require('stylus');
+jade = require('jade');
 require('joose');
 require('joosex-namespace-depended');
 require('hash');
@@ -48,7 +49,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'explore-node' }));
+  app.use(express.session({ secret: 'I bet you wont guess my secret...' }));
   // TODO: Might switch back to sass later.
   //app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
   app.use(stylus.middleware({
@@ -69,11 +70,12 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-// Router
-require('./controllers/routes.js');
-
 // Libraries
 auth = require('./lib/auth.js');
+validate = require('./lib/validate.js');
+
+// Router
+require('./controllers/routes.js');
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

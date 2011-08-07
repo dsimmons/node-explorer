@@ -1,17 +1,17 @@
 form(method='post', action='/user')
 	p
 		label First Name:
-			input(type='text', name='firstName, value= user.firstName)
+			input(type='text', name='firstName', value= user.firstName)
 	p
 		label Last Name:
 			input(type='text', name='lastName', value= user.lastName)
 	p
 		label Username:
 			input(type='text', name='username', value= user.username)
-	-if (user)
+	-if (user.registered)
 		p
 			label Existing Password: 
-				input(type='password', name='passOld")
+				input(type='password', name='passOld')
 	p
 		label Create Password:
 			input(type='password', name='password')
