@@ -1,16 +1,17 @@
 h1 Login to continue
-#content
+p
+	| Please login or go
+	a(href='/signup') here
+	|  to create a new account.
+	form(method='post', action='/login')
+		-if (user.errors.length)
+			p#error
+				| Incorrect username or password!
+		p.field
+			label Username:
+			input.input(type='text', name='username')
+		p.field
+			label Password:
+			input.input(type='password', name='password')
 		p
-			| Please login or go
-			a(href='/signup') here
-			|  to create a new account.
-		p
-			form(method='post', action='/login')
-				p
-					label Username:
-						input(type='text', name='username')
-				p
-					label Password:
-						input(type='password', name='password')
-				p
-					input.button(type='submit', value='send')
+			input.button(type='submit', value='send')

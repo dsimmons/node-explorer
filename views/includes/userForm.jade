@@ -1,25 +1,29 @@
 form(method='post', action='/user')
-	p
+	- if (user.errors.length)
+		p#error
+			- each item in user.errors
+				| #{item}
+				br
+	p.field
 		label First Name:
-			input(type='text', name='firstName', value= user.firstName)
-	p
+		input.input(type='text', name='firstName', value= user.firstName)
+	p.field
 		label Last Name:
-			input(type='text', name='lastName', value= user.lastName)
-	p
+		input.input(type='text', name='lastName', value= user.lastName)
+	p.field
 		label Username:
-			input(type='text', name='username', value= user.username)
+		input.input(type='text', name='username', value= user.username)
 	-if (user.registered)
-		p
+		p.field
 			label Existing Password: 
-				input(type='password', name='passOld')
-	p
-		label Create Password:
-			input(type='password', name='password')
-	p
+			input.input(type='password', name='passOld')
+	p.field
+		label Password:
+		input.input(type='password', name='password')
+	p.field
 		label Repeat Password:
-			input(type='password', name='password2')
-	p
+		input.input(type='password', name='password2')
+	p.field
 		label Email:
-			input(type='text', name='email', value= user.email)
-	p
-		input(type='submit', value='submit')
+		input.input(type='text', name='email', value= user.email)
+	input.button.field(type='submit', value='submit')

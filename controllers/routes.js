@@ -19,7 +19,9 @@ app.get('/login', function(req, res) {
 	if (req.session.user) {
 		res.redirect('/');
 	} else {
-		res.render('login', { 'user': {} }); 
+		var user = {};
+		user.errors = [];
+		res.render('login', { 'user': user }); 
 	}
 });
 
@@ -33,13 +35,16 @@ app.get('/logout', function(req, res) {
 
 // New User
 app.get('/signup', function(req, res) {
-	res.render('signup', { 'user': {} });
+	var user = {};
+	user.errors = [];
+	res.render('signup', { 'user': user });
 });
 
 
 // Edit Profile
 app.get('/user', validate.checkSession, function(req, res) {
 	req.session.user.registered = true;
+	req.session.user.errors = [];
 	res.render('user', { 'user': req.session.user });
 });
 
@@ -54,7 +59,10 @@ app.post('/login', function(req, res) {
 		if ((err) || (!user)) {
 			console.log(err);
 			req.session.error = 'Authentication failed. Check username and password.';
-			res.redirect('back');
+
+			var user = {};
+			user.errors = ['Incorrect username or password!'];
+			res.render('login', { 'user': user });
 		} else if (user) {
 			req.session.regenerate(function() {
 				req.session.cookie.maxAge = 1000 * 60 * 60; // 1 hour

@@ -1,7 +1,11 @@
-.button{-webkit-border-radius:.5em;-moz-border-radius:.5em;border-radius:.5em;-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.2);-moz-box-shadow:0 1px 2px rgba(0,0,0,0.2);box-shadow:0 1px 2px rgba(0,0,0,0.2);display:inline-block;padding:.5em 2em .55em;outline:none;cursor:pointer;text-align:center;text-decoration:none;border:solid 1px #ccc;text-shadow:0 1px 1px rgba(0,0,0,0.3);border:solid 1px #00b2f7;color:mix(#fff,#00b7ff,90%);background-color:#00b7ff;background:-webkit-gradient(linear,left #21c0ff,left #00b7ff,from(#21c0ff),to(#00b7ff));background:-moz-linear-gradient(#21c0ff,#21c0ff,#00b7ff);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
-.button:hover{text-decoration:none}
-.button:active{position:relative;top:1px}
-.button:hover{background-color:#00aef2;background:-webkit-gradient(linear,left #1abeff,left #00aef2,from(#1abeff),to(#00aef2));background:-moz-linear-gradient(#1abeff,#1abeff,#00aef2);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
-.button:active{background-color:#1abeff;background:-webkit-gradient(linear,left #00b7ff,left #1abeff,from(#00b7ff),to(#1abeff));background:-moz-linear-gradient(#00b7ff,#00b7ff,#1abeff);filter progid:DXImageTransform.Microsoft.gradient(startColorsr={top}, endColorstr={bottom})}
-body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}
+body{padding:50px 0;font:14px Arial,sans-serif;color:#444}
 a{color:#00b7ff}
+label{display:block;float:left;font-weight:bold;margin-right:10px;text-align:right;width:150px;line-height:25px}
+form{width:480px;padding:20px;background:#f0f0f0;overflow:auto;border:1px solid #ccc;-moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px;-moz-box-shadow:2px 2px 2px #ccc;-webkit-box-shadow:2px 2px 2px #ccc;box-shadow:2px 2px 2px #ccc}
+form p:hover label{color:#0459b7}
+.field{margin-top:0;margin-bottom:7px;padding:0}
+.input{font:15px Arial,Verdana;padding:5px;border:1px solid #b9bdc1;width:300px;color:#797979;}
+.input:focus{border:1px solid #093cc7 5;-moz-box-shadow:0 0 3px #0459b7;-webkit-box-shadow:0 0 3px #0459b7;outline:none}
+.button{background:#ddd;background:-moz-linear-gradient(90deg,#0459b7,#08adff);background:-webkit-gradient(linear,left top,left bottom,from(#08adff),to(#0459b7));border:1px solid #093c75;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-moz-box-shadow:0 1px 0 #fff;-webkit-box-shadow:0 1px 0 #fff;box-shadow:0 1px 0 #fff;color:#fff;font-weight:bold;font-size:12px;cursor:pointer;float:right;margin-top:10px;margin-right:10px;line-height:1;padding:5px 10px;text-align:center;text-decoration:none;text-shadow:0 1px 1px #333;text-transform:uppercase;}
+.button:hover{background:#848fb2;cursor:pointer}
+#error{background:rgba(166,65,42,0.2);border:2px solid #a6412a;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;display:block;padding:5px 5px;margin-top:0}
