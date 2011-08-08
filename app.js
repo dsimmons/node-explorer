@@ -1,24 +1,41 @@
 /* Global dependencies and exports */
 sys = require('sys');
 path = require('path');
+fs = require('fs');
 express = require('express');
 stylus = require('stylus');
 jade = require('jade');
 require('joose');
 require('joosex-namespace-depended');
 require('hash');
+require('colors');
 
-app = module.exports = express.createServer();
+var isHTTPS = false;
+if (path.existsSync('./conf/key.pem')) {
+	if (path.existsSync('./conf/cert.pem')) {
+		app = express.createServer({
+			key: fs.readFileSync('./conf/key.pem'),
+			cert: fs.readFileSync('./conf/cert.pem')
+		});
+		isHTTPS = true;
+	}
+
+} else {
+	app = express.createServer();
+}
+
+module.exports = app;
 app_root = __dirname;
 
 /* Connect to MongoDB */
 mongoose = require('mongoose');
 db = mongoose.connect('mongodb://localhost/node-explorer');
 
+console.log('');
 if (db) {
-	console.log("Connection to MongoDB successful!");
+	console.log("Connection to MongoDB successful!".green);
 } else {
-	console.log("Unable to connect to MongoDB!");
+	console.log("Unable to connect to MongoDB!".red);
 	throw err;
 }
 
@@ -28,16 +45,16 @@ User = mongoose.model('User');
 /* See if we need to create the admin account */
 User.findOne({}, function(err, user) {
 	if (!user) {
-		console.log("It appears this is the first time you've run node-explorer!");
-		console.log("Initializing admin account....");
+		console.log("It appears this is the first time you've run node-explorer!".white);
+		console.log("Initializing admin account....".white);
 		var user = new User();
 		user.username = 'admin';
 		user.password = Hash.sha256('password');
 		user.isEnabled = true;
 		user.isAdmin = true;
 		user.save(function(err) {
-			if (err) console.log("Unable to write to database!");
-			else console.log("Admin account created succesfully! (admin :: password)");
+			if (err) console.log("Unable to write to database!".red);
+			else console.log("Admin account created succesfully! (admin :: password)".green);
 		});
 	}
 });
@@ -78,5 +95,19 @@ validate = require('./lib/validate.js');
 require('./controllers/routes.js');
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
-console.log("Running out of: %s", app_root);
+
+console.log(
+		'Express server listening on port '.blue + '%d'.green.bold +' over '.blue + '%s', 
+		app.address().port, 
+		(isHTTPS) ? 'HTTPS '.green.bold + '(REMEMBER: https://...)'.red.bold : 'HTTP'.green);
+console.log('Running in %s mode out of: '.blue + '%s'.white, app.settings.env, app_root);
+
+// MAGIC!  Don't touch.  Spent a lot of time making this look pretty by method of trial and error >.<
+console.log('                   _                                 _                         '.white);
+console.log('                  | |                               | |                        '.white);
+console.log('  _____   ___  ___| |  ___________  _____  _______  | |  ___  ____  ____  ____ '.white);
+console.log(' | _   \\/ _  \\/  _  |/ _  |______|/ _ |\\ \\/ / |  _ \\| | / _ \\|  __|/ _  \\|  __|'.white);
+console.log(' | | | || (_) | (_| |  __/       |  _/ >    < | |_) | || (_) | |  |  __/ | |   '.white);
+console.log(' |_| |_|\\___ / \\____|\\___|        \\___//_/\\_\\ |  __/|_| \\___/|_|   \\___| |_|   '.white);
+console.log('                                              | |                               '.white);
+console.log('                                              |_|                               '.white);

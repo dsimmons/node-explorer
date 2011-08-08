@@ -104,3 +104,14 @@ app.post('/user', validate.checkForm, function(req, res) {
 
 	});
 });
+
+// Make sure we keep serving static file requests
+app.get('/*.(js|css)', function(req, res) {
+	res.sendfile('./'+req.url);
+});
+
+// NEEDS to remain last. Handles all requests that aren't valid.
+app.get('/*', function(req, res) {
+	res.redirect('/login');
+});
+

@@ -27,7 +27,6 @@
 		"hash": ">= 0.0.1",
 		"joose": ">= 0.0.1",
 		"joosex-namespace-depended": ">= 0.0.1",
-		"backbone": ">= 0.0.1",
-		"underscore": ">= 0.0.1"
+		"colors": ">= 0.0.1"
   }
 }
