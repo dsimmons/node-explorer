@@ -1,4 +1,4 @@
-body{padding:50px 0;font:14px Arial,sans-serif;color:#444}
+body{padding:50px 0;font:14px Arial,sans-serif;color:#444;background:#ddd}
 a{color:#00b7ff}
 label{display:block;float:left;font-weight:bold;margin-right:10px;text-align:right;width:150px;line-height:25px}
 form{width:480px;padding:20px;background:#f0f0f0;overflow:auto;border:1px solid #ccc;-moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px;-moz-box-shadow:2px 2px 2px #ccc;-webkit-box-shadow:2px 2px 2px #ccc;box-shadow:2px 2px 2px #ccc}
