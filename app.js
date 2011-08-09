@@ -10,22 +10,21 @@ require('joosex-namespace-depended');
 require('hash');
 require('colors');
 
-var isHTTPS = false;
 if (path.existsSync('./conf/key.pem')) {
 	if (path.existsSync('./conf/cert.pem')) {
 		app = express.createServer({
 			key: fs.readFileSync('./conf/key.pem'),
 			cert: fs.readFileSync('./conf/cert.pem')
 		});
-		isHTTPS = true;
+		app.isHTTPS = true;
 	}
 
 } else {
 	app = express.createServer();
+	app.isHTTPS = false;
 }
+app.app_root = __dirname;
 
-module.exports = app;
-app_root = __dirname;
 
 /* Connect to MongoDB */
 mongoose = require('mongoose');
@@ -99,8 +98,8 @@ app.listen(3000);
 console.log(
 		'Express server listening on port '.blue + '%d'.green.bold +' over '.blue + '%s', 
 		app.address().port, 
-		(isHTTPS) ? 'HTTPS '.green.bold + '(REMEMBER: https://...)'.red.bold : 'HTTP'.green);
-console.log('Running in %s mode out of: '.blue + '%s'.white, app.settings.env, app_root);
+		(app.isHTTPS) ? 'HTTPS '.green.bold + '(REMEMBER: https://...)'.red.bold : 'HTTP'.green);
+console.log('Running in %s mode out of: '.blue + '%s'.white, app.settings.env, app.app_root);
 
 // MAGIC!  Don't touch.  Spent a lot of time making this look pretty by method of trial and error >.<
 console.log('                   _                                 _                         '.white);

@@ -11,11 +11,11 @@ if [ -d ./scripts ]; then
 	-subj '/C=US/ST=Georgia/L=Atlanta/O=node-explorer/CN=localhost' -newkey rsa:1024 \
 	-keyout ./conf/key.pem -out ./conf/cert.pem
 
-	if [ -d /etc/nginx/conf.d ]; then
-		echo 'Copying symlinks to Nginx configuration...'
-		sudo ln -s $PWD/conf/key.pem /etc/nginx/conf.d/cert.key
-		sudo ln -s $PWD/conf/cert.pem /etc/nginx/conf.d/cert.pem
-	fi
+	#if [ -d /etc/nginx/conf.d ]; then
+		#echo 'Copying symlinks to Nginx configuration...'
+		#sudo ln -s $PWD/conf/key.pem /etc/nginx/conf.d/cert.key
+		#sudo ln -s $PWD/conf/cert.pem /etc/nginx/conf.d/cert.pem
+	#fi
 	echo 'Success, finished!'
 
 else
