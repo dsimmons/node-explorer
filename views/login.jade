@@ -1,12 +1,9 @@
 h1 Login to continue
 p
 	| Please login or go
-	a(href='/signup') here
+	a(href='/register') here
 	|  to create a new account.
 	form(method='post', action='/login')
-		-if (user.errors.length)
-			p#error
-				| Incorrect username or password!
 		p.field
 			label Username:
 			input.input(type='text', name='username')

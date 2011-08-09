@@ -4,12 +4,16 @@ path = require('path');
 fs = require('fs');
 express = require('express');
 stylus = require('stylus');
-jade = require('jade');
+//jade = require('jade');
+//TODO: replace this crap with crypto
 require('joose');
 require('joosex-namespace-depended');
 require('hash');
 require('colors');
 
+/* Defaults to HTTP server */
+/* Optionally, HTTPS with certificates in ./conf */
+/* You can use ./scripts/generate-certificate.sh to generate self-signed certs */
 if (path.existsSync('./conf/key.pem')) {
 	if (path.existsSync('./conf/cert.pem')) {
 		app = express.createServer({
@@ -18,7 +22,6 @@ if (path.existsSync('./conf/key.pem')) {
 		});
 		app.isHTTPS = true;
 	}
-
 } else {
 	app = express.createServer();
 	app.isHTTPS = false;
@@ -47,8 +50,12 @@ User.findOne({}, function(err, user) {
 		console.log("It appears this is the first time you've run node-explorer!".white);
 		console.log("Initializing admin account....".white);
 		var user = new User();
+		user.firstName = 'Administrator';
+		user.lastName = 'N/A';
 		user.username = 'admin';
 		user.password = Hash.sha256('password');
+		user.email = 'admin@localhost.com';
+		user.quota = Number.MAX_VALUE;
 		user.isEnabled = true;
 		user.isAdmin = true;
 		user.save(function(err) {
@@ -58,7 +65,7 @@ User.findOne({}, function(err, user) {
 	}
 });
 
-// Configuration
+/* Configuration */
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -66,8 +73,6 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: 'I bet you wont guess my secret...' }));
-  // TODO: Might switch back to sass later.
-  //app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
   app.use(stylus.middleware({
 	  src: __dirname + '/public',
 	  compile: function compile(str, path) {
@@ -101,7 +106,7 @@ console.log(
 		(app.isHTTPS) ? 'HTTPS '.green.bold + '(REMEMBER: https://...)'.red.bold : 'HTTP'.green);
 console.log('Running in %s mode out of: '.blue + '%s'.white, app.settings.env, app.app_root);
 
-// MAGIC!  Don't touch.  Spent a lot of time making this look pretty by method of trial and error >.<
+// MAGIC!  Don't touch.  Spent a lot of time making this look pretty (>.<)
 console.log('                   _                                 _                         '.white);
 console.log('                  | |                               | |                        '.white);
 console.log('  _____   ___  ___| |  ___________  _____  _______  | |  ___  ____  ____  ____ '.white);
