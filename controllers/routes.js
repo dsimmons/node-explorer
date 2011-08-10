@@ -6,7 +6,7 @@ app.get('/', checkSession, function(req, res) {
 
 // Finished
 app.get('/register', function(req, res) {
-	if (req.user.session)
+	if (req.session.user)
 		res.redirect('/');
 	else
 		res.render('register');
@@ -14,7 +14,7 @@ app.get('/register', function(req, res) {
 
 // Finished
 app.get('/login', function(req, res) {
-	if (req.user.session)
+	if (req.session.user)
 		res.redirect('/');
 	else
 		res.render('login');

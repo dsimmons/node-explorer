@@ -1,3 +1,13 @@
+func-box-shadow(args...)
+	-moz-box-shadow args
+	-webkit-box-shadow args
+	box-shadow args
+
+func-border-radius(n)
+	-moz-border-radius n
+	-webkit-border-radius n
+	border-radius n
+
 body
 	padding 50px 0px
 	font 14px Arial, sans-serif
@@ -22,12 +32,8 @@ form
 	background #f0f0f0
 	overflow auto
 	border 1px solid #cccccc
-	-moz-border-radius 7px
-	-webkit-border-radius 7px
-	border-radius 7px
-	-moz-box-shadow 2px 2px 2px #cccccc
-	-webkit-box-shadow 2px 2px 2px #cccccc
-	box-shadow 2px 2px 2px #cccccc
+	func-border-radius(7px)
+	func-box-shadow 2px 2px 2px #cccccc
 
 form p
 	&:hover
@@ -47,8 +53,7 @@ form p
 	color #797979
 	&:focus 
 		border 1px solid #093cc75
-		-moz-box-shadow 0 0 3px #0459b7
-		-webkit-box-shadow 0 0 3px #0459b7
+		func-box-shadow 0 0 3px #0459b7
 		outline none
 
 .button
@@ -56,12 +61,8 @@ form p
 	background -moz-linear-gradient(90deg, #0459b7, #08adff)
 	background -webkit-gradient(linear, left top, left bottom, from(#08adff), to(#0459b7))
 	border 1px solid #093c75
-	-moz-border-radius 3px
-	-webkit-border-radius 3px
-	border-radius 3px
-	-moz-box-shadow 0 1px 0 #fff
-	-webkit-box-shadow 0 1px 0 #fff
-	box-shadow 0 1px 0 #fff
+	func-border-radius 3px
+	func-box-shadow 0 1px 0 #fff
 	color #fff
 	font-weight bold
 	font-size 12px
@@ -82,10 +83,7 @@ form p
 #error
 	background rgba(166, 65, 42, 0.2)
 	border 2px solid #a6412a
-	-moz-border-radius 3px
-	-webkit-border-radius 3px
-	border-radius 3px
-	//display none
+	func-border-radius 3px
 	display block
 	padding 5px 5px
 	margin-top 0px
