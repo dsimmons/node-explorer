@@ -1,10 +1,13 @@
-//- if (user.username)
-	p.nav
-		a(href='/') Home
+p.nav
+	a(href='/') Home
+	|  |  
+	- if (locals.user.isAdmin)
+		a(href='/admin') Admin Panel
 		|  |  
-		-if (user.isAdmin)
-			a(href='/admin') Admin Panel
-			|  |  
-		a(href='/user') Edit Profile
-		|  |  
-		a(href='/logout') Log Out
+	a(href='/requests/'+ locals.user.username) Requests
+	|  |  
+	a(href='/downloads/'+ locals.user.username) Downloads 
+	|  |  
+	a(href='/user/'+ locals.user.username) Edit Profile
+	|  |  
+	a(href='/logout') Log Out

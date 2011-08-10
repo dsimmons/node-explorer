@@ -1,0 +1,6 @@
+include ../includes/head
+h1 Edit Profile
+p Currently editing user: #{locals.user.username}
+form(method='post', action='/user')
+	include ../includes/userForm
+	

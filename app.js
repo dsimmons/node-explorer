@@ -1,14 +1,9 @@
 /* Global dependencies and exports */
-sys = require('sys');
 path = require('path');
 fs = require('fs');
 express = require('express');
 stylus = require('stylus');
-//jade = require('jade');
-//TODO: replace this crap with crypto
-require('joose');
-require('joosex-namespace-depended');
-require('hash');
+crypto = require('crypto');
 require('colors');
 
 /* Defaults to HTTP server */
@@ -53,7 +48,7 @@ User.findOne({}, function(err, user) {
 		user.firstName = 'Administrator';
 		user.lastName = 'N/A';
 		user.username = 'admin';
-		user.password = Hash.sha256('password');
+		user.password = crypto.createHmac('sha256', 'password').digest('hex'); 
 		user.email = 'admin@localhost.com';
 		user.quota = Number.MAX_VALUE;
 		user.isEnabled = true;

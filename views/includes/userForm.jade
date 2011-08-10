@@ -1,29 +1,23 @@
-form(method='post', action='/user')
-	- if (user.errors.length)
-		p#error
-			- each item in user.errors
-				| #{item}
-				br
+p.field
+	label First Name:
+	input.input(type='text', name='firstName', value= locals.user.firstName)
+p.field
+	label Last Name:
+	input.input(type='text', name='lastName', value= locals.user.lastName)
+p.field
+	label Username:
+	input.input(type='text', name='username', value= locals.user.username)
+-if (locals.user.registered)
 	p.field
-		label First Name:
-		input.input(type='text', name='firstName', value= user.firstName)
-	p.field
-		label Last Name:
-		input.input(type='text', name='lastName', value= user.lastName)
-	p.field
-		label Username:
-		input.input(type='text', name='username', value= user.username)
-	-if (user.registered)
-		p.field
-			label Existing Password: 
-			input.input(type='password', name='passOld')
-	p.field
-		label Password:
-		input.input(type='password', name='password')
-	p.field
-		label Repeat Password:
-		input.input(type='password', name='password2')
-	p.field
-		label Email:
-		input.input(type='text', name='email', value= user.email)
-	input.button.field(type='submit', value='submit')
+		label Existing Password: 
+		input.input(type='password', name='passOld')
+p.field
+	label Password:
+	input.input(type='password', name='password')
+p.field
+	label Repeat Password:
+	input.input(type='password', name='password2')
+p.field
+	label Email:
+	input.input(type='text', name='email', value= locals.user.email)
+input.button.field(type='submit', value='submit')
