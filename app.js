@@ -83,7 +83,7 @@ app.configure('production', function(){
 
 /* Lib modules */
 auth = require('./lib/auth.js');
-validate = require('./lib/validate.js');
+validation = require('./lib/validation.js');
 
 /* Routes */
 require('./controllers/routes.js');

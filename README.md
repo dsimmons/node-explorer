@@ -8,14 +8,17 @@
 * HTML templating with **Jade**
 * CSS templating with **Stylus**
 
-### Features (planned)
+### Why? Features (implemented and/or planned)
 * **Authentication**
-	* Only authenticated users can make it to the home page.
-	* New users can register, but accounts are disabled by default.
-	* Administrators have full control over who is granted access.
+	* All requests default to the login screen until the user obtains a valid session.
+	* While new users are able to register, accounts are disabled by default until obtaining administrator approval.
+	* Administrators have full control over who is granted access (enable/disable accounts at will).
+	* Administrators can additionally delegate permissions on a per-user basis from the administrative panel.
+	* Administrators can assign individual download quotas per user.  Defaults to 5GB.
+	* Automatically monitors for account sharing by tracking the number of unique IP addresses a user has logged in from (and number of logins).
 * **Security**
 	* All passwords are stored as salted SHA-256 hashes.
-	* Traffic defaults to HTTPS over TLS/SSL.
+	* Although HTTP is supported, functionality for HTTPS over encrypted TLS/SSL is both included and encouraged.
 * **Speed**
 	* FAST. Node + MongoDB + Express.
 	* Additional caching mechanisms to come eventually.
@@ -30,7 +33,7 @@
 	npm install -d
 	node app
 
-You should now be able to access the server at http://serverip:3000/
+You should now be able to access the server at http://serverip:3000/ (or https://serverip:3000);
 
 ### License
 
