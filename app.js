@@ -23,11 +23,9 @@ if (path.existsSync('./conf/key.pem')) {
 }
 app.app_root = __dirname;
 
-
 /* Connect to MongoDB */
 mongoose = require('mongoose');
 db = mongoose.connect('mongodb://localhost/node-explorer');
-
 console.log('');
 if (db) {
 	console.log("Connection to MongoDB successful!".green);
@@ -35,7 +33,6 @@ if (db) {
 	console.log("Unable to connect to MongoDB!".red);
 	throw err;
 }
-
 require('./models/user.js');
 User = mongoose.model('User');
 
@@ -60,7 +57,7 @@ User.findOne({}, function(err, user) {
 	}
 });
 
-/* Configuration */
+/* Express configuration */
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -77,20 +74,18 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
-
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
-
 app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-// Libraries
+/* Lib modules */
 auth = require('./lib/auth.js');
 validate = require('./lib/validate.js');
 
-// Router
+/* Routes */
 require('./controllers/routes.js');
 
 app.listen(3000);
@@ -100,7 +95,6 @@ console.log(
 		app.address().port, 
 		(app.isHTTPS) ? 'HTTPS '.green.bold + '(REMEMBER: https://...)'.red.bold : 'HTTP'.green);
 console.log('Running in %s mode out of: '.blue + '%s'.white, app.settings.env, app.app_root);
-
 // MAGIC!  Don't touch.  Spent a lot of time making this look pretty (>.<)
 console.log('                   _                                 _                         '.white);
 console.log('                  | |                               | |                        '.white);
