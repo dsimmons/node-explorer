@@ -1,5 +1,4 @@
-//var remoteAddr = (app.isHTTPS) ? req.connection.socket.remoteAddress : req.connection.remoteAddress;
-app.get('/', checkSession, checkEnabled, function(req, res) {
+app.get('/', checkSession, function(req, res) {
 	res.render('index', { locals: { user: req.session.user } });
 });
 
@@ -21,7 +20,7 @@ app.get('/admin', checkSession, checkAdmin, function(req, res) {
 	res.render('admin', { locals: { user: req.session.user } });
 });
 
-app.get('/disabled', checkSession, function(req, res) {
+app.get('/disabled', function(req, res) {
 	res.render('user/disabled', { locals: { user: req.session.user } });
 });
 
@@ -31,7 +30,7 @@ app.get('/logout', function(req, res) {
 	});
 });
 
-app.param('username', checkSession, checkEnabled, function(req, res, next, username) {
+app.param('username', checkSession, function(req, res, next, username) {
 	if ((req.session.user.username === username) || req.session.user.isAdmin) {
 		next();
 	} else {
@@ -41,7 +40,7 @@ app.param('username', checkSession, checkEnabled, function(req, res, next, usern
 });
 
 app.get('/user/:username', function(req, res) {
-	retrieveUser(req.params.username, function(err, user) {
+	auth.retrieveUser(req.params.username, function(err, user) {
 		if ((err) || (!user)){
 			console.log(err);
 			res.redirect('back');
@@ -52,7 +51,7 @@ app.get('/user/:username', function(req, res) {
 });
 
 app.get('/downloads/:username', function(req, res) {
-	retrieveUser(req.params.username, function(err, user) {
+	auth.retrieveUser(req.params.username, function(err, user) {
 		if ((err) || (!user))
 			res.redirect('back');
 		else
@@ -61,7 +60,7 @@ app.get('/downloads/:username', function(req, res) {
 });
 
 app.get('/requests/:username', function(req, res) {
-	retrieveUser(req.params.username, function(err, user) {
+	auth.retrieveUser(req.params.username, function(err, user) {
 		if ((err) || (!user))
 			res.redirect('back');
 		else
@@ -71,7 +70,7 @@ app.get('/requests/:username', function(req, res) {
 
 app.post('/login', function(req, res) {
 
-	auth.login(req.body.username, req.body.password, function(err, user) {
+	auth.login(req, req.body.username, req.body.password, function(err, user) {
 
 		if ((err) || (!user)) {
 			console.log(err);
@@ -91,43 +90,50 @@ app.post('/login', function(req, res) {
 
 });
 
-//TODO
-app.post('/user', function(req, res) {
-	var user = new User();
-	auth.saveUser(user, function(err) {
-		if (user)
-			res.redirect('/login');
-		else
-			res.redireect('back');
+app.post('/register', function(req, res) {
+
+	var newUser = new User();
+
+	auth.retrieveUser(req.body.username, function(err, existingUser) {
+		if (existingUser)
+			res.redirect('back');
+		else {
+			auth.saveUser(req, newUser, function(err, user) {
+				if (user)
+					res.redirect('/login');
+				else {
+					console.log(err);
+					res.redireect('back');
+				}
+			});
+		}
 	});
 });
 
 //TODO
 app.post('/user/:username', function(req, res) {
+	var user = auth.retrieveUser(req.params.username, function(err, user) {
+		//nest callbacks?
+	});
+	auth.saveUser(req, user, function(err, user) {
+		if (user)
+			res.redirect('/login');
+		else
+			res.redireect('back');
+	});
 
 });
 
-function retrieveUser(username, fn) {
-	User.findOne({ 'username': username }, function(err, user) {
-		if (err || (!user))
-			return fn(new Error('Unable to retrieve user!'));
-		else
-			return fn(null, user);
-	});
-}
-
-function checkEnabled(req, res, next) {
-	if (!req.session.user.isEnabled)
-		res.redirect('/disabled');
-	else
-		next();
-}
-
 function checkSession(req, res, next) {
-	if (req.session.user) 
-		next();
-	else 
+	if (req.session.user) {
+		if (req.session.user.isEnabled)
+			next();
+		else
+			res.redirect('/disabled');
+	}
+	else  {
 		res.redirect('/login'); 
+	}
 }
 
 function checkAdmin(req, res, next) {
