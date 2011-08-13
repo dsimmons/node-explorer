@@ -1,4 +1,4 @@
-app.get('/', validation.checkSession, function(req, res) {
+app.get('/', auth.checkSession, auth.checkEnabled, function(req, res) {
 	res.render('index', { locals: { user: req.session.user } });
 });
 
@@ -16,16 +16,12 @@ app.get('/login', function(req, res) {
 		res.render('login');
 });
 
-app.get('/admin', validation.checkSession, validation.checkAdmin, function(req, res) {
+app.get('/admin', auth.checkSession, auth.checkAdmin, function(req, res) {
 	res.render('admin', { locals: { user: req.session.user } });
 });
 
-app.get('/disabled', function(req, res) {
-	// Prevents error if someone requests /disabled with no session, however rare it might be...
-	if (req.session.user)
-		res.render('user/disabled', { locals: { user: req.session.user } });
-	else
-		res.redirect('/login');
+app.get('/disabled', auth.checkSession, function(req, res) {
+	res.render('user/disabled', { locals: { user: req.session.user } });
 });
 
 app.get('/logout', function(req, res) {
@@ -35,7 +31,7 @@ app.get('/logout', function(req, res) {
 });
 
 // Pre-process requests with a username argument, check for a session & proper auth.
-app.param('username', validation.checkSession, function(req, res, next, username) {
+app.param('username', auth.checkSession, auth.checkEnabled, function(req, res, next, username) {
 	if ((req.session.user.username === username) || req.session.user.isAdmin) {
 		next();
 	} else {
@@ -93,10 +89,10 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
-	var newUser = new User();
 
+	var newUser = new User();
 	auth.retrieveUser(req.body.username, function(err, existingUser) {
-		if (existingUser)
+		if (err || existingUser)
 			res.redirect('back');
 		else {
 			auth.saveUser(req, newUser, function(err, user) {
@@ -111,18 +107,20 @@ app.post('/register', function(req, res) {
 	});
 });
 
-//TODO
 app.post('/user/:username', function(req, res) {
 	var user = auth.retrieveUser(req.params.username, function(err, user) {
-		//nest callbacks?
+		if (err || (!user))
+			res.redirect('back');
+		else {
+			auth.saveUser(req, user, function(err, user) {
+				if (user) {
+					req.session.user = user;
+					res.redirect('/');
+				} else
+					res.redireect('back');
+			});
+		}
 	});
-	auth.saveUser(req, user, function(err, user) {
-		if (user)
-			res.redirect('/login');
-		else
-			res.redireect('back');
-	});
-
 });
 
  //Make sure we keep serving static file requests

@@ -1,7 +1,7 @@
 {
     "name": "node-explorer",
 	"description": "A NodeJS file directory explorer & file server",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"main": "app.js",
 	"author": "Dan Simmons <dsimmons@gatech.edu> (danielrsimmons.com)",
 	"repositories": {
@@ -24,9 +24,6 @@
 		"mongoose": ">= 0.0.1",
 		"stylus": ">= 0.0.1",
 		"jade": ">= 0.0.1",
-		"hash": ">= 0.0.1",
-		"joose": ">= 0.0.1",
-		"joosex-namespace-depended": ">= 0.0.1",
 		"colors": ">= 0.0.1"
   }
 }
