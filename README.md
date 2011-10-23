@@ -1,4 +1,5 @@
 ## node-explorer
+**Update**: This project is currently on pause in favor of a new open source project that myself and Jeffrey Portman (ChromoX) have started, finance.js.  I may come back to it at some point in the future when I have time.
 
 **node-explorer** is intended to be a lightweight file server built using node.js and the following:
 
